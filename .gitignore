@@ -1,0 +1,29 @@
+# ============================================================
+# AutoRoute AI — Git Ignore
+# ============================================================
+
+# Dependencies
+node_modules/
+
+# Environment variable files — NEVER commit these
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output
+frontend/dist/
+backend/dist/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
