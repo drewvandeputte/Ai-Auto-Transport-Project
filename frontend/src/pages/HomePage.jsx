@@ -131,10 +131,10 @@ function HomePage({ onQuoteResult }) {
           <div className="feature-card">
             <span className="feature-icon">🛡</span>
             <div>
-              <p className="feature-title">Insurance Included</p>
+              <p className="feature-title">Cargo Insurance Included</p>
               <p className="feature-desc">
-                Every carrier we recommend carries cargo insurance,
-                so your vehicle is protected in transit.
+                Every carrier we recommend carries federally required
+                cargo insurance to protect your vehicle during transit.
               </p>
             </div>
           </div>
