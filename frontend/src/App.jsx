@@ -1,11 +1,10 @@
 // ============================================================
 // AutoRoute AI — Root App Component
 // ============================================================
-// Manages which page the user sees: Home, Results, Booking,
-// or Admin. The admin page is accessed via /#/admin.
-// ============================================================
 
 import { useState } from 'react';
+import Navbar      from './components/Navbar';
+import Footer      from './components/Footer';
 import HomePage    from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
 import BookingPage from './pages/BookingPage';
@@ -14,8 +13,8 @@ import AdminPage   from './pages/AdminPage';
 function App() {
   const isAdmin = window.location.hash === '#/admin';
 
-  const [page, setPage]               = useState('home');
-  const [quoteData, setQuoteData]     = useState(null);
+  const [page, setPage]                       = useState('home');
+  const [quoteData, setQuoteData]             = useState(null);
   const [selectedCarrier, setSelectedCarrier] = useState(null);
 
   function handleQuoteResult(data) {
@@ -40,11 +39,19 @@ function App() {
   }
 
   if (isAdmin) {
-    return <AdminPage />;
+    return (
+      <>
+        <Navbar />
+        <AdminPage />
+        <Footer />
+      </>
+    );
   }
 
   return (
-    <div className="app">
+    <>
+      <Navbar />
+
       {page === 'home' && (
         <HomePage onQuoteResult={handleQuoteResult} />
       )}
@@ -63,7 +70,9 @@ function App() {
           onBack={handleBackToResults}
         />
       )}
-    </div>
+
+      <Footer />
+    </>
   );
 }
 
