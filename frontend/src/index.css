@@ -424,6 +424,7 @@ button {
   border-radius: 8px;
   background: #22222f;
   color: #e8e8f0;
+  color-scheme: dark; /* makes browser-native icons (calendar, etc.) light colored */
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
