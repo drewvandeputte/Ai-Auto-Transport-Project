@@ -1,35 +1,44 @@
 // ============================================================
 // AutoRoute AI — Root App Component
 // ============================================================
-// Manages which page the user sees: Home, Results, or Admin.
-// The admin page is accessed by visiting /#/admin in the browser.
+// Manages which page the user sees: Home, Results, Booking,
+// or Admin. The admin page is accessed via /#/admin.
 // ============================================================
 
 import { useState } from 'react';
 import HomePage    from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
+import BookingPage from './pages/BookingPage';
 import AdminPage   from './pages/AdminPage';
 
 function App() {
-  // Show the admin page if the URL hash is #/admin
   const isAdmin = window.location.hash === '#/admin';
 
-  const [page, setPage]           = useState('home');
-  const [quoteData, setQuoteData] = useState(null);
+  const [page, setPage]               = useState('home');
+  const [quoteData, setQuoteData]     = useState(null);
+  const [selectedCarrier, setSelectedCarrier] = useState(null);
 
-  // Called when the user submits the quote form.
   function handleQuoteResult(data) {
     setQuoteData(data);
     setPage('results');
   }
 
-  // Called when the user clicks "Start Over" on the results page.
+  function handleSelectCarrier(carrier) {
+    setSelectedCarrier(carrier);
+    setPage('booking');
+  }
+
+  function handleBackToResults() {
+    setSelectedCarrier(null);
+    setPage('results');
+  }
+
   function handleReset() {
     setQuoteData(null);
+    setSelectedCarrier(null);
     setPage('home');
   }
 
-  // Admin view — only shown when URL is /#/admin
   if (isAdmin) {
     return <AdminPage />;
   }
@@ -40,7 +49,19 @@ function App() {
         <HomePage onQuoteResult={handleQuoteResult} />
       )}
       {page === 'results' && (
-        <ResultsPage quoteData={quoteData} onReset={handleReset} />
+        <ResultsPage
+          quoteData={quoteData}
+          onReset={handleReset}
+          onSelectCarrier={handleSelectCarrier}
+        />
+      )}
+      {page === 'booking' && (
+        <BookingPage
+          carrier={selectedCarrier}
+          quoteData={quoteData}
+          onReset={handleReset}
+          onBack={handleBackToResults}
+        />
       )}
     </div>
   );

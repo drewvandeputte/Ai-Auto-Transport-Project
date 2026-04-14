@@ -1,9 +1,8 @@
 // ============================================================
 // AutoRoute AI — Admin Page
 // ============================================================
-// Internal view showing all quotes submitted through the
-// platform. Accessible at /#/admin in the browser.
-// Not linked from the main UI — for internal use only.
+// Internal view showing all quotes and leads submitted.
+// Accessible at /#/admin — not linked from the main UI.
 // ============================================================
 
 import { useEffect, useState } from 'react';
@@ -12,19 +11,27 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 function AdminPage() {
   const [quotes,  setQuotes]  = useState([]);
+  const [leads,   setLeads]   = useState([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
+  const [tab,     setTab]     = useState('leads'); // 'leads' or 'quotes'
 
-  // Fetch all quotes when the page loads
   useEffect(() => {
-    async function fetchQuotes() {
+    async function fetchData() {
       try {
-        const response = await fetch(`${API_URL}/api/admin/quotes`);
-        const data     = await response.json();
+        const [quotesRes, leadsRes] = await Promise.all([
+          fetch(`${API_URL}/api/admin/quotes`),
+          fetch(`${API_URL}/api/admin/leads`),
+        ]);
 
-        if (!response.ok) throw new Error(data.error || 'Failed to load quotes.');
+        const quotesData = await quotesRes.json();
+        const leadsData  = await leadsRes.json();
 
-        setQuotes(data.quotes);
+        if (!quotesRes.ok) throw new Error(quotesData.error || 'Failed to load quotes.');
+        if (!leadsRes.ok)  throw new Error(leadsData.error  || 'Failed to load leads.');
+
+        setQuotes(quotesData.quotes);
+        setLeads(leadsData.leads);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -32,60 +39,119 @@ function AdminPage() {
       }
     }
 
-    fetchQuotes();
+    fetchData();
   }, []);
 
-  if (loading) return <div className="page"><p>Loading quotes...</p></div>;
+  if (loading) return <div className="page"><p>Loading...</p></div>;
   if (error)   return <div className="page"><p className="error-message">Error: {error}</p></div>;
 
   return (
     <main className="page" style={{ maxWidth: '960px' }}>
-      <h2>Admin — All Quotes</h2>
-      <p style={{ color: '#555', marginBottom: '1.5rem' }}>
-        {quotes.length} quote{quotes.length !== 1 ? 's' : ''} submitted so far.
-      </p>
+      <h2>AutoRoute AI — Admin Dashboard</h2>
 
-      {quotes.length === 0 ? (
-        <p>No quotes yet. Submit one from the homepage!</p>
-      ) : (
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{
-            width: '100%',
-            borderCollapse: 'collapse',
-            fontSize: '0.875rem',
-          }}>
-            <thead>
-              <tr style={{ background: '#f0f0f0', textAlign: 'left' }}>
-                <th style={th}>Date</th>
-                <th style={th}>Vehicle</th>
-                <th style={th}>Route</th>
-                <th style={th}>Type</th>
-                <th style={th}>Top Carrier</th>
-                <th style={th}>Price</th>
-                <th style={th}>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {quotes.map(q => (
-                <tr key={q.id} style={{ borderBottom: '1px solid #eee' }}>
-                  <td style={td}>{new Date(q.created_at).toLocaleDateString()}</td>
-                  <td style={td}>{q.vehicle_year} {q.vehicle_make} {q.vehicle_model}</td>
-                  <td style={td}>{q.pickup_zip} → {q.delivery_zip}</td>
-                  <td style={td} style={{ textTransform: 'capitalize' }}>{q.transport_type}</td>
-                  <td style={td}>{q.top_carrier_name}</td>
-                  <td style={td}>${q.top_carrier_price?.toLocaleString()}</td>
-                  <td style={td}>{q.top_carrier_score}/100</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {/* Tab switcher */}
+      <div className="admin-tabs">
+        <button
+          className={`admin-tab ${tab === 'leads' ? 'active' : ''}`}
+          onClick={() => setTab('leads')}
+        >
+          Leads ({leads.length})
+        </button>
+        <button
+          className={`admin-tab ${tab === 'quotes' ? 'active' : ''}`}
+          onClick={() => setTab('quotes')}
+        >
+          All Quotes ({quotes.length})
+        </button>
+      </div>
+
+      {/* Leads table */}
+      {tab === 'leads' && (
+        <>
+          <p style={{ color: '#555', marginBottom: '1rem' }}>
+            People who selected a carrier and submitted their contact info.
+          </p>
+          {leads.length === 0 ? (
+            <p>No leads yet.</p>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+                <thead>
+                  <tr style={{ background: '#f0f0f0', textAlign: 'left' }}>
+                    <th style={th}>Date</th>
+                    <th style={th}>Name</th>
+                    <th style={th}>Email</th>
+                    <th style={th}>Phone</th>
+                    <th style={th}>Vehicle</th>
+                    <th style={th}>Route</th>
+                    <th style={th}>Carrier</th>
+                    <th style={th}>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.map(l => (
+                    <tr key={l.id} style={{ borderBottom: '1px solid #eee' }}>
+                      <td style={td}>{new Date(l.created_at).toLocaleDateString()}</td>
+                      <td style={td}>{l.name}</td>
+                      <td style={td}>{l.email}</td>
+                      <td style={td}>{l.phone}</td>
+                      <td style={td}>{l.vehicle_year} {l.vehicle_make} {l.vehicle_model}</td>
+                      <td style={td}>{l.pickup_zip} → {l.delivery_zip}</td>
+                      <td style={td}>{l.carrier_name}</td>
+                      <td style={td}>${l.carrier_price?.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Quotes table */}
+      {tab === 'quotes' && (
+        <>
+          <p style={{ color: '#555', marginBottom: '1rem' }}>
+            All quote requests submitted through the platform.
+          </p>
+          {quotes.length === 0 ? (
+            <p>No quotes yet.</p>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem' }}>
+                <thead>
+                  <tr style={{ background: '#f0f0f0', textAlign: 'left' }}>
+                    <th style={th}>Date</th>
+                    <th style={th}>Vehicle</th>
+                    <th style={th}>Route</th>
+                    <th style={th}>Type</th>
+                    <th style={th}>Top Carrier</th>
+                    <th style={th}>Price</th>
+                    <th style={th}>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {quotes.map(q => (
+                    <tr key={q.id} style={{ borderBottom: '1px solid #eee' }}>
+                      <td style={td}>{new Date(q.created_at).toLocaleDateString()}</td>
+                      <td style={td}>{q.vehicle_year} {q.vehicle_make} {q.vehicle_model}</td>
+                      <td style={td}>{q.pickup_zip} → {q.delivery_zip}</td>
+                      <td style={td} style={{ textTransform: 'capitalize' }}>{q.transport_type}</td>
+                      <td style={td}>{q.top_carrier_name}</td>
+                      <td style={td}>${q.top_carrier_price?.toLocaleString()}</td>
+                      <td style={td}>{q.top_carrier_score}/100</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
       )}
     </main>
   );
 }
 
-// Simple reusable cell styles
 const th = { padding: '0.6rem 0.75rem', fontWeight: '600' };
 const td = { padding: '0.6rem 0.75rem', color: '#333' };
 

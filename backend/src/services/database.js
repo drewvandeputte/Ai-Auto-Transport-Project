@@ -66,4 +66,57 @@ async function getAllQuotes() {
   return result.rows;
 }
 
-module.exports = { saveQuote, getAllQuotes };
+/**
+ * Save a lead (contact info + selected carrier) to the database.
+ * @param {Object} leadData - Name, email, phone, and shipment details
+ */
+async function saveLead(leadData) {
+  const query = `
+    INSERT INTO leads (
+      name,
+      email,
+      phone,
+      carrier_name,
+      carrier_price,
+      pickup_zip,
+      delivery_zip,
+      vehicle_year,
+      vehicle_make,
+      vehicle_model,
+      transport_type,
+      ship_date
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+    RETURNING id
+  `;
+
+  const values = [
+    leadData.name,
+    leadData.email,
+    leadData.phone,
+    leadData.carrierName,
+    leadData.carrierPrice,
+    leadData.pickupZip,
+    leadData.deliveryZip,
+    leadData.vehicleYear,
+    leadData.vehicleMake,
+    leadData.vehicleModel,
+    leadData.transportType,
+    leadData.shipDate,
+  ];
+
+  const result = await pool.query(query, values);
+  return result.rows[0].id;
+}
+
+/**
+ * Fetch all leads from the database, newest first.
+ * @returns {Array} List of lead rows
+ */
+async function getAllLeads() {
+  const result = await pool.query(
+    'SELECT * FROM leads ORDER BY created_at DESC'
+  );
+  return result.rows;
+}
+
+module.exports = { saveQuote, getAllQuotes, saveLead, getAllLeads };

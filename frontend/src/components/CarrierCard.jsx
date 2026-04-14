@@ -1,14 +1,16 @@
 // ============================================================
 // AutoRoute AI — Carrier Card Component
 // ============================================================
-// Displays a single carrier's details in the results list.
-// Highlights the top-ranked carrier with a special border.
+// Displays a single carrier in the results list.
+// Clicking the card navigates to the booking page.
 // ============================================================
 
-function CarrierCard({ carrier, rank, isTop }) {
+function CarrierCard({ carrier, rank, isTop, onSelect }) {
   return (
-    <div className={`carrier-card ${isTop ? 'top-pick' : ''}`}>
-
+    <div
+      className={`carrier-card ${isTop ? 'top-pick' : ''} carrier-card-clickable`}
+      onClick={() => onSelect(carrier)}
+    >
       {/* Badge only shown on the top carrier */}
       {isTop && (
         <span className="top-pick-badge">AI Top Pick</span>
@@ -28,9 +30,9 @@ function CarrierCard({ carrier, rank, isTop }) {
             ${carrier.priceUSD.toLocaleString()}
           </span>
           <span className="carrier-score">Score: {carrier.score}/100</span>
+          <span className="carrier-select-hint">Select →</span>
         </div>
       </div>
-
     </div>
   );
 }

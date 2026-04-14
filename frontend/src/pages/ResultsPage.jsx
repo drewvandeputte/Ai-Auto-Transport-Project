@@ -1,13 +1,13 @@
 // ============================================================
 // AutoRoute AI — Results Page
 // ============================================================
-// Displays the AI explanation and ranked carrier list returned
-// from the backend after the user submits their quote request.
+// Displays the AI explanation and ranked carrier list.
+// Clicking a carrier card navigates to the booking page.
 // ============================================================
 
 import CarrierCard from '../components/CarrierCard';
 
-function ResultsPage({ quoteData, onReset }) {
+function ResultsPage({ quoteData, onReset, onSelectCarrier }) {
   const { rankedCarriers, topCarrier, explanation, quoteRequest } = quoteData;
 
   return (
@@ -27,14 +27,15 @@ function ResultsPage({ quoteData, onReset }) {
         <p>{explanation}</p>
       </div>
 
-      {/* Ranked Carrier List */}
-      <h3>All Carriers Ranked</h3>
+      {/* Ranked Carrier List — click any card to go to booking */}
+      <h3>Select a Carrier to Get Started</h3>
       {rankedCarriers.map((carrier, index) => (
         <CarrierCard
           key={carrier.id}
           carrier={carrier}
           rank={index + 1}
           isTop={carrier.id === topCarrier.id}
+          onSelect={onSelectCarrier}
         />
       ))}
 
