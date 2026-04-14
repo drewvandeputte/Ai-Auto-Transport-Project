@@ -41,7 +41,7 @@ function App() {
   if (isAdmin) {
     return (
       <>
-        <Navbar />
+        <Navbar onLogoClick={handleReset} />
         <AdminPage />
         <Footer />
       </>
@@ -50,7 +50,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar onLogoClick={handleReset} />
 
       {page === 'home' && (
         <HomePage onQuoteResult={handleQuoteResult} />

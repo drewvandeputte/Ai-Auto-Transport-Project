@@ -38,9 +38,10 @@ function HomePage({ onQuoteResult }) {
 
   return (
     <>
-      {/* ── Hero ──────────────────────────────────────────── */}
-      <section>
-        <div className="hero">
+      {/* ── Hero + Form (side by side on desktop) ─────────── */}
+      <section className="home-hero-section">
+        {/* Left: hero copy */}
+        <div>
           <span className="hero-eyebrow">AI-Powered Auto Transport</span>
           <h1 className="hero-headline">
             Ship Your Car —<br />
@@ -52,7 +53,7 @@ function HomePage({ onQuoteResult }) {
           </p>
         </div>
 
-        {/* Quote form card */}
+        {/* Right: quote form card */}
         <div className="quote-card">
           <p className="quote-card-title">Get Your Free Quote</p>
           <QuoteForm onSubmit={handleFormSubmit} loading={loading} />
