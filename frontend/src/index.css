@@ -365,9 +365,9 @@ button {
   }
 }
 
-/* ── Page wrapper (results, booking, admin) ───────────────── */
+/* ── Page wrapper (admin only) ────────────────────────────── */
 .page {
-  max-width: 780px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 3rem 2.5rem;
   flex: 1;
@@ -378,6 +378,87 @@ button {
   .page {
     padding: 1.5rem 1rem;
   }
+}
+
+/* ── Results page — wider single column ───────────────────── */
+.results-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+  flex: 1;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .results-page {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ── Booking page — two-column desktop layout ─────────────── */
+.booking-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+  flex: 1;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .booking-page {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Two-column grid: details left, form right */
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.booking-details {
+  min-width: 0; /* prevent overflow in grid */
+}
+
+/* Sticky form column */
+.booking-form-column {
+  position: relative;
+}
+
+.booking-form-sticky {
+  position: sticky;
+  top: 84px; /* navbar height + gap */
+}
+
+/* Price callout inside the form */
+.form-price-callout {
+  background: rgba(109, 40, 217, 0.1);
+  border: 1px solid rgba(109, 40, 217, 0.25);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.form-price-amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.form-price-label {
+  font-size: 0.82rem;
+  color: #b0b0c8;
 }
 
 /* ── Form elements ────────────────────────────────────────── */
