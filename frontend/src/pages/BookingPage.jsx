@@ -221,34 +221,6 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
         <div className="booking-form-column">
           <div className="booking-form-sticky">
 
-            {/* What happens next — above the form */}
-            <div className="booking-section">
-              <h3>What Happens Next</h3>
-              <div className="next-steps">
-                <div className="next-step">
-                  <span className="next-step-number">1</span>
-                  <div>
-                    <strong>We confirm with the carrier</strong>
-                    <p>We reach out to {carrier.name} to lock in your rate and pickup date.</p>
-                  </div>
-                </div>
-                <div className="next-step">
-                  <span className="next-step-number">2</span>
-                  <div>
-                    <strong>You get a call within 24 hours</strong>
-                    <p>An AutoRoute advisor will call you to walk through the details and answer any questions.</p>
-                  </div>
-                </div>
-                <div className="next-step">
-                  <span className="next-step-number">3</span>
-                  <div>
-                    <strong>Your vehicle is picked up</strong>
-                    <p>The carrier picks up your vehicle on your ship date and delivers it to {quoteRequest.deliveryZip}.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div className="booking-section" style={{ marginBottom: 0 }}>
               <h3>Confirm Your Request</h3>
 
@@ -306,6 +278,17 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
                 </button>
               </form>
             </div>
+
+            {/* What happens next — compact, below the form */}
+            <div className="booking-section" style={{ marginTop: '1rem', marginBottom: 0 }}>
+              <h3>What Happens Next</h3>
+              <div className="next-steps-compact">
+                <p className="next-step-compact"><span className="next-step-number">1</span> We confirm availability with {carrier.name}</p>
+                <p className="next-step-compact"><span className="next-step-number">2</span> An advisor calls you within 24 hours</p>
+                <p className="next-step-compact"><span className="next-step-number">3</span> Your vehicle is picked up on your ship date</p>
+              </div>
+            </div>
+
           </div>
         </div>
 

@@ -380,6 +380,37 @@ button {
   }
 }
 
+/* Score explanation line under carrier list heading */
+.score-explanation {
+  font-size: 0.82rem;
+  color: #b0b0c8;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* Compact next steps for booking page right column */
+.next-steps-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.next-step-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.875rem;
+  color: #b0b0c8;
+  margin: 0;
+}
+
+.next-step-compact .next-step-number {
+  width: 22px;
+  height: 22px;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
 /* ── Results page — wider single column ───────────────────── */
 .results-page {
   max-width: 900px;

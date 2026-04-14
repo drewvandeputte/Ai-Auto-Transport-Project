@@ -11,7 +11,6 @@ function CarrierCard({ carrier, rank, isTop, onSelect }) {
       className={`carrier-card ${isTop ? 'top-pick' : ''} carrier-card-clickable`}
       onClick={() => onSelect(carrier)}
     >
-      {/* Badge only shown on the top carrier */}
       {isTop && (
         <span className="top-pick-badge">AI Top Pick</span>
       )}
@@ -29,7 +28,7 @@ function CarrierCard({ carrier, rank, isTop, onSelect }) {
           <span className="carrier-price-amount">
             ${carrier.priceUSD.toLocaleString()}
           </span>
-          <span className="carrier-score">Score: {carrier.score}/100</span>
+          <span className="carrier-score">AI Score: {carrier.score}/100</span>
           <span className="carrier-select-hint">Select →</span>
         </div>
       </div>
