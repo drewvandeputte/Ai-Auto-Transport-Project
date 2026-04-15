@@ -9,6 +9,7 @@ import HomePage    from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
 import BookingPage from './pages/BookingPage';
 import AdminPage   from './pages/AdminPage';
+import ChatWidget  from './components/ChatWidget';
 
 function App() {
   const isAdmin = window.location.hash === '#/admin';
@@ -44,6 +45,7 @@ function App() {
         <Navbar onLogoClick={handleReset} />
         <AdminPage />
         <Footer />
+        <ChatWidget />
       </>
     );
   }
@@ -72,6 +74,7 @@ function App() {
       )}
 
       <Footer />
+      <ChatWidget />
     </>
   );
 }

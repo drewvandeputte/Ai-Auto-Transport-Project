@@ -119,4 +119,36 @@ async function getAllLeads() {
   return result.rows;
 }
 
-module.exports = { saveQuote, getAllQuotes, saveLead, getAllLeads };
+/**
+ * Look up a lead by email address (most recent booking first).
+ * Used by the chat service to answer shipment status questions.
+ * @param {string} email - Customer email address
+ * @returns {Object|null} Lead row or null if not found
+ */
+async function getLeadByEmail(email) {
+  const result = await pool.query(
+    'SELECT * FROM leads WHERE LOWER(email) = LOWER($1) ORDER BY created_at DESC LIMIT 1',
+    [email]
+  );
+  return result.rows[0] || null;
+}
+
+/**
+ * Flag a lead as cancellation requested.
+ * Updates status and records the timestamp.
+ * @param {string} email - Customer email address
+ * @returns {boolean} true if a record was updated, false if not found
+ */
+async function flagCancellation(email) {
+  const result = await pool.query(
+    `UPDATE leads
+     SET status = 'cancellation_requested',
+         cancellation_requested_at = NOW()
+     WHERE LOWER(email) = LOWER($1)
+     RETURNING id`,
+    [email]
+  );
+  return result.rowCount > 0;
+}
+
+module.exports = { saveQuote, getAllQuotes, saveLead, getAllLeads, getLeadByEmail, flagCancellation };

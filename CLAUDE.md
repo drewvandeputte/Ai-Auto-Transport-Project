@@ -38,6 +38,45 @@ No FMCSA license has been obtained yet. No real bookings. Demo only.
 - Email automation
 - Live booking confirmation
 
+## AI-Assisted Booking (Build This)
+When a customer selects a carrier and confirms their booking, the system
+should prepare a complete booking package and present it as a ready-to-execute
+task. This means:
+- All carrier details pre-populated (MC number, contact, rate, route)
+- Bill of lading pre-drafted and ready to send
+- A single confirmation screen for the operator (or VA) showing everything
+  needed to complete the Central Dispatch booking in under 3 minutes
+- After operator confirms, customer receives automated booking confirmation
+  email with carrier details and tracking info
+
+The goal is to reduce manual booking time from 15-20 minutes to 2-3 minutes
+per shipment. The human clicks confirm — the AI has done everything else.
+
+## AI Customer Support Chat (Build This)
+Add an AI chat widget to the website and customer dashboard. The AI should:
+- Answer questions about shipment status, timing, policies, and process
+- Know our carrier vetting standards, what customers can/can't put in their car,
+  open vs enclosed differences, and typical transit times by route
+- Pull live shipment status data to answer "where is my car" questions
+- Handle standard cancellation requests automatically
+- Detect when a question needs human escalation and route it appropriately
+- Be available 24/7 with no human involvement for routine questions
+
+Target: AI handles 80-90% of all inbound customer questions without
+human intervention.
+
+## Automated Cancellation Recovery (Build This - Phase 3)
+If a carrier cancels or goes dark before pickup:
+- System detects the cancellation automatically
+- AI immediately notifies the customer with a reassurance message
+- AI queries available carriers on the same route using our scoring engine
+- If a replacement scores above our minimum threshold, auto-book and notify
+  customer with new carrier details
+- If no carrier clearly qualifies, surface top 3 options for operator approval
+- Log everything for review
+- Entire process from detection to customer notification should complete
+  in under 10 minutes without human involvement for standard cases
+
 ## Business Context
 - Target customers: individuals relocating, military families, online car buyers
 - Revenue model: commission per shipment (~15-20% of shipment value, ~$175/shipment)

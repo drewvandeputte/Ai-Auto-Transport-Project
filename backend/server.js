@@ -13,6 +13,7 @@ const cors    = require('cors');
 const quotesRouter = require('./src/routes/quotes');
 const adminRouter  = require('./src/routes/admin');
 const leadsRouter  = require('./src/routes/leads');
+const chatRouter   = require('./src/routes/chat');
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use('/api/quotes', quotesRouter);
 app.use('/api/admin',  adminRouter);
 app.use('/api/leads',  leadsRouter);
+app.use('/api/chat',   chatRouter);
 
 // ── Health check ─────────────────────────────────────────────
 // Quick endpoint to confirm the server is running
