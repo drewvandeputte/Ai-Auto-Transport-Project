@@ -107,3 +107,15 @@ Use these realistic carriers for demo purposes:
 - Keep components small and single-purpose
 - Use .env files for all API keys — never hardcode them
 - After each major feature, confirm it works before moving to the next
+
+## Security & Bot Protection (Add Before Public Launch)
+Before the site goes live to real customers, implement:
+- Google reCAPTCHA v3 on all public forms (quote form, contact form)
+- Rate limiting on the backend: max 3 quote requests per IP per 10 minutes
+- ZIP code validation before any Anthropic API call is made
+- Honeypot hidden field on the quote form
+- Admin dashboard flags for suspicious submission patterns
+- AI chat widget requires email or order number for shipment-specific info
+- Never expose carrier pricing logic or internal scoring weights to 
+  unauthenticated users via the chat widget
+  
