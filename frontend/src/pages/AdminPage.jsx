@@ -5,7 +5,7 @@
 // Accessible at /#/admin — not linked from the main UI.
 // ============================================================
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -15,6 +15,7 @@ function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
   const [tab,     setTab]     = useState('leads'); // 'leads' or 'quotes'
+  const [updating, setUpdating] = useState(null);  // lead id currently being updated
 
   useEffect(() => {
     async function fetchData() {
@@ -41,6 +42,23 @@ function AdminPage() {
 
     fetchData();
   }, []);
+
+  async function handleStatusChange(leadId, newStatus) {
+    setUpdating(leadId);
+    try {
+      await fetch(`${API_URL}/api/leads/${leadId}/status`, {
+        method:  'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ status: newStatus }),
+      });
+      // Update local state so the UI reflects the change immediately
+      setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: newStatus } : l));
+    } catch (err) {
+      console.error('Failed to update status:', err);
+    } finally {
+      setUpdating(null);
+    }
+  }
 
   if (loading) return <div className="page"><p>Loading...</p></div>;
   if (error)   return <div className="page"><p className="error-message">Error: {error}</p></div>;
@@ -86,6 +104,7 @@ function AdminPage() {
                     <th style={th}>Route</th>
                     <th style={th}>Carrier</th>
                     <th style={th}>Price</th>
+                    <th style={th}>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -99,6 +118,25 @@ function AdminPage() {
                       <td style={td}>{l.pickup_zip} → {l.delivery_zip}</td>
                       <td style={td}>{l.carrier_name}</td>
                       <td style={td}>${l.carrier_price?.toLocaleString()}</td>
+                      <td style={td}>
+                        <select
+                          value={l.status || 'confirmed'}
+                          onChange={e => handleStatusChange(l.id, e.target.value)}
+                          disabled={updating === l.id}
+                          style={{
+                            ...statusSelectStyle,
+                            ...statusColors[l.status || 'confirmed'],
+                          }}
+                        >
+                          <option value="confirmed">Confirmed</option>
+                          <option value="contacted">Contacted</option>
+                          <option value="booked">Booked</option>
+                          <option value="in_transit">In Transit</option>
+                          <option value="delivered">Delivered</option>
+                          <option value="cancellation_requested">Cancel Requested</option>
+                          <option value="cancelled">Cancelled</option>
+                        </select>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -154,5 +192,24 @@ function AdminPage() {
 
 const th = { padding: '0.6rem 0.75rem', fontWeight: '600' };
 const td = { padding: '0.6rem 0.75rem', color: '#333' };
+
+const statusSelectStyle = {
+  border: 'none',
+  borderRadius: '12px',
+  padding: '0.25rem 0.5rem',
+  fontSize: '0.78rem',
+  fontWeight: '600',
+  cursor: 'pointer',
+};
+
+const statusColors = {
+  confirmed:               { background: '#dbeafe', color: '#1d4ed8' },
+  contacted:               { background: '#fef9c3', color: '#854d0e' },
+  booked:                  { background: '#ede9fe', color: '#6d28d9' },
+  in_transit:              { background: '#ffedd5', color: '#c2410c' },
+  delivered:               { background: '#dcfce7', color: '#15803d' },
+  cancellation_requested:  { background: '#fee2e2', color: '#b91c1c' },
+  cancelled:               { background: '#f3f4f6', color: '#6b7280' },
+};
 
 export default AdminPage;
