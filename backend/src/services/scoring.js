@@ -35,12 +35,24 @@ function scoreAndRankCarriers(quoteRequest) {
   const maxInsurance = Math.max(...insurance);
 
   const scored = CARRIERS.map(carrier => {
-    // Normalize each metric to 0–1.
+    // Normalize each metric to 0–1 (relative position among carriers).
     // For price and transit days, LOWER is better, so we invert the scale.
-    const priceScore    = 1 - (carrier.priceUSD    - minPrice)    / (maxPrice    - minPrice);
-    const ratingScore   =     (carrier.rating      - minRating)   / (maxRating   - minRating);
-    const transitScore  = 1 - (carrier.transitDays - minDays)     / (maxDays     - minDays);
-    const insurScore    =     (carrier.insuranceUSD - minInsurance) / (maxInsurance - minInsurance);
+    const relativePrice   = 1 - (carrier.priceUSD     - minPrice)      / (maxPrice     - minPrice);
+    const relativeRating  =     (carrier.rating        - minRating)     / (maxRating    - minRating);
+    const relativeTransit = 1 - (carrier.transitDays  - minDays)       / (maxDays      - minDays);
+    const relativeInsur   =     (carrier.insuranceUSD - minInsurance)   / (maxInsurance - minInsurance);
+
+    // Apply a floor of 0.60 — any carrier that meets our vetting standards
+    // starts at 60/100 and earns up to 100 based on how it compares to others.
+    // This keeps scores in a realistic 76–95 range so a 4.8-star carrier
+    // doesn't show a misleadingly low number like 70.
+    const FLOOR = 0.60;
+    const RANGE = 1 - FLOOR; // 0.40 points available above the floor
+
+    const priceScore   = FLOOR + RANGE * relativePrice;
+    const ratingScore  = FLOOR + RANGE * relativeRating;
+    const transitScore = FLOOR + RANGE * relativeTransit;
+    const insurScore   = FLOOR + RANGE * relativeInsur;
 
     // Apply weights (must sum to 1.0)
     const totalScore =
