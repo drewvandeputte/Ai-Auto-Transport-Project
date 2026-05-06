@@ -1,13 +1,10 @@
 // ============================================================
 // AutoRoute AI — Home Page
 // ============================================================
-// Full marketing homepage with hero, quote form, how it works,
-// why AutoRoute, and footer sections.
-// ============================================================
 
 import { useState } from 'react';
 import QuoteForm from '../components/QuoteForm';
-import { SparklesIcon, BanknotesIcon, ShieldCheckIcon, BoltIcon, NoSymbolIcon, CreditCardIcon } from '../components/Icons';
+import { SparklesIcon, BanknotesIcon, ShieldCheckIcon, NoSymbolIcon, CreditCardIcon } from '../components/Icons';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -39,32 +36,29 @@ function HomePage({ onQuoteResult }) {
 
   return (
     <>
-      {/* ── Hero + Form (side by side on desktop) ─────────── */}
-      <section className="home-hero-section">
-        {/* Left: hero copy */}
+      {/* ── Hero + Form ───────────────────────────────────────── */}
+      <section className="home-hero-section" id="get-a-quote">
         <div>
           <span className="hero-eyebrow">AI-Powered Auto Transport</span>
           <h1 className="hero-headline">
             Ship Your Car —<br />
-            <span>Without the Guesswork</span>
+            <span>Without the Runaround</span>
           </h1>
           <p className="hero-subheadline">
-            Most brokers hide what they charge. We don't. We charge a flat $149
-            fee — shown upfront, separate from the carrier rate. Enter your
-            route and our AI ranks every carrier in seconds with a plain-English
-            explanation of exactly why it chose the best one.
+            Submit your route once. No sales calls, no hidden fees. Within 24
+            business hours you'll receive a graded AI carrier report with our
+            recommendation — and a flat $149 fee that's always shown upfront.
           </p>
         </div>
 
-        {/* Right: quote form card */}
         <div className="quote-card">
-          <p className="quote-card-title">Get Your Free Quote</p>
+          <p className="quote-card-title">Get Your Free Estimate</p>
           <QuoteForm onSubmit={handleFormSubmit} loading={loading} />
           {error && <p className="error-message">Error: {error}</p>}
         </div>
       </section>
 
-      {/* ── Trust Bar ─────────────────────────────────────── */}
+      {/* ── Trust Bar ─────────────────────────────────────────── */}
       <div className="trust-bar">
         <div className="trust-bar-item">
           <BanknotesIcon size={22} className="trust-bar-icon" />
@@ -77,14 +71,14 @@ function HomePage({ onQuoteResult }) {
           <NoSymbolIcon size={22} className="trust-bar-icon" />
           <div>
             <p className="trust-bar-title">No Sales Calls</p>
-            <p className="trust-bar-desc">Instant AI results.</p>
+            <p className="trust-bar-desc">Submit once, hear back by email.</p>
           </div>
         </div>
         <div className="trust-bar-item">
-          <ShieldCheckIcon size={22} className="trust-bar-icon" />
+          <SparklesIcon size={22} className="trust-bar-icon" />
           <div>
-            <p className="trust-bar-title">Vetted Carriers Only</p>
-            <p className="trust-bar-desc">Rated, licensed & insured.</p>
+            <p className="trust-bar-title">AI Carrier Report</p>
+            <p className="trust-bar-desc">Graded comparison, plain English.</p>
           </div>
         </div>
         <div className="trust-bar-item">
@@ -98,36 +92,38 @@ function HomePage({ onQuoteResult }) {
 
       <hr className="section-divider" />
 
-      {/* ── How It Works ──────────────────────────────────── */}
-      <section className="section">
+      {/* ── How It Works ──────────────────────────────────────── */}
+      <section className="section" id="how-it-works">
         <p className="section-eyebrow">Simple Process</p>
         <h2 className="section-headline">How It Works</h2>
         <p className="section-sub">
-          From quote to carrier selection in under two minutes.
+          From submission to confirmed carrier in three steps.
         </p>
         <div className="steps-grid">
           <div className="step-card">
             <div className="step-number">1</div>
-            <p className="step-title">Enter Your Details</p>
+            <p className="step-title">Submit Your Route</p>
             <p className="step-desc">
-              Tell us your pickup and delivery locations, vehicle info,
-              transport type, and target ship date.
+              Enter your pickup and delivery locations, vehicle info, transport
+              type, and target ship date. You'll get an instant market-rate
+              estimate right away.
             </p>
           </div>
           <div className="step-card">
             <div className="step-number">2</div>
-            <p className="step-title">AI Compares Carriers</p>
+            <p className="step-title">Receive Your AI Report</p>
             <p className="step-desc">
-              Our AI scores every carrier on price, rating, transit time,
-              and insurance — then ranks them for your specific shipment.
+              We post your shipment to our carrier network and collect bids.
+              Within 24 business hours you'll receive a graded carrier comparison
+              with a plain-English recommendation.
             </p>
           </div>
           <div className="step-card">
             <div className="step-number">3</div>
-            <p className="step-title">Pick Your Carrier</p>
+            <p className="step-title">Confirm and We Handle the Rest</p>
             <p className="step-desc">
-              Review the ranked results with plain-English explanations,
-              select your carrier, and we'll handle the rest.
+              Approve your carrier with one click. We lock them in and coordinate
+              your pickup — no phone calls, no paperwork, no surprises.
             </p>
           </div>
         </div>
@@ -135,22 +131,23 @@ function HomePage({ onQuoteResult }) {
 
       <hr className="section-divider" />
 
-      {/* ── Why AutoRoute ─────────────────────────────────── */}
+      {/* ── Why AutoRoute ─────────────────────────────────────── */}
       <section className="section">
         <p className="section-eyebrow">Why AutoRoute AI</p>
         <h2 className="section-headline">A Smarter Way to Ship</h2>
         <p className="section-sub">
-          No more calling around for quotes. No more confusing contracts.
-          Just clear, honest recommendations.
+          No callbacks. No confusion. No hidden fees. Just a clear, honest
+          process from start to finish.
         </p>
         <div className="features-grid">
           <div className="feature-card">
             <SparklesIcon size={26} className="feature-icon" />
             <div>
-              <p className="feature-title">AI-Powered Recommendations</p>
+              <p className="feature-title">AI Carrier Report</p>
               <p className="feature-desc">
-                Not just a price list — our AI explains in plain English
-                exactly why it chose your top carrier.
+                Every carrier bid is graded on price, rating, transit time, and
+                insurance. You get a plain-English explanation of exactly why we
+                recommend the carrier we do.
               </p>
             </div>
           </div>
@@ -168,20 +165,20 @@ function HomePage({ onQuoteResult }) {
           <div className="feature-card">
             <ShieldCheckIcon size={26} className="feature-icon" />
             <div>
-              <p className="feature-title">Cargo Insurance Included</p>
+              <p className="feature-title">Vetted Carriers Only</p>
               <p className="feature-desc">
-                Every carrier we recommend carries federally required
-                cargo insurance to protect your vehicle during transit.
+                Every carrier we work with is licensed, insured, and rated by
+                real customers. We grade them before we recommend them.
               </p>
             </div>
           </div>
           <div className="feature-card">
-            <BoltIcon size={26} className="feature-icon" />
+            <NoSymbolIcon size={26} className="feature-icon" />
             <div>
-              <p className="feature-title">Results in Seconds</p>
+              <p className="feature-title">No Phone Calls. Ever.</p>
               <p className="feature-desc">
-                No waiting for callbacks. Get ranked carrier options
-                and a personalized recommendation instantly.
+                Submit once and everything happens by email on your schedule.
+                No broker calling five times. No pressure tactics. No voicemails.
               </p>
             </div>
           </div>

@@ -81,15 +81,34 @@ button {
   color: #7c3aed;
 }
 
-.navbar-tagline {
-  font-size: 0.82rem;
-  color: #b0b0c8;
-  display: none;
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-@media (min-width: 640px) {
-  .navbar-tagline {
-    display: block;
+.nav-link {
+  background: none;
+  border: none;
+  color: #b0b0c8;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 480px) {
+  .nav-link {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.5rem;
   }
 }
 
@@ -1348,4 +1367,229 @@ input[type="date"].form-input {
     right: 1rem;
     bottom: 1rem;
   }
+}
+
+/* ── About Page ───────────────────────────────────────────── */
+.about-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.about-section {
+  margin-bottom: 3rem;
+}
+
+.about-body {
+  margin-bottom: 1.75rem;
+}
+
+.about-body p {
+  color: #b0b0c8;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.about-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-differentiators {
+  background: #13131f;
+  border: 1px solid #2e2e3f;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.75rem;
+}
+
+.about-differentiators h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.about-list li {
+  color: #b0b0c8;
+  line-height: 1.65;
+  font-size: 0.95rem;
+  padding-left: 1rem;
+  border-left: 2px solid #7c3aed;
+}
+
+.about-list li strong {
+  color: #ffffff;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-card {
+  background: #13131f;
+  border: 1px solid #2e2e3f;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.contact-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7c3aed;
+  margin-bottom: 0.4rem;
+}
+
+.contact-value {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 0.35rem;
+}
+
+.contact-value:hover {
+  color: #a78bfa;
+}
+
+.contact-note {
+  font-size: 0.82rem;
+  color: #7c7c9a;
+}
+
+/* ── Quote Received Page ──────────────────────────────────── */
+.quote-received-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.qr-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.qr-check {
+  width: 64px;
+  height: 64px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+  border-radius: 50%;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+}
+
+.qr-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.qr-sub {
+  font-size: 1.05rem;
+  color: #b0b0c8;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.qr-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .qr-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.qr-card {
+  background: #13131f;
+  border: 1px solid #2e2e3f;
+  border-radius: 14px;
+  padding: 1.75rem;
+}
+
+.qr-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.qr-price-card {
+  border-color: #7c3aed;
+}
+
+.qr-price-range {
+  margin-bottom: 0.75rem;
+}
+
+.qr-price-amount {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.2rem;
+}
+
+.qr-price-includes {
+  display: block;
+  font-size: 0.82rem;
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.qr-price-disclaimer {
+  font-size: 0.8rem;
+  color: #7c7c9a;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #2e2e3f;
+}
+
+.qr-what-next h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+}
+
+.qr-no-payment {
+  margin-top: 1.25rem;
+  font-size: 0.82rem;
+  color: #4ade80;
+  font-weight: 600;
+  text-align: center;
 }

@@ -14,7 +14,7 @@ function ResultsPage({ quoteData, onReset, onSelectCarrier }) {
   return (
     <main className="results-page">
       <div className="results-header">
-        <h2>Your Auto Transport Results</h2>
+        <h2>Your AI Carrier Report</h2>
         <p className="results-route">
           {quoteRequest.vehicleYear} {quoteRequest.vehicleMake} {quoteRequest.vehicleModel}
           {' — '}
@@ -29,7 +29,7 @@ function ResultsPage({ quoteData, onReset, onSelectCarrier }) {
       </div>
 
       {/* Ranked Carrier List — click any card to go to booking */}
-      <h3 style={{ marginBottom: '0.4rem' }}>Select a Carrier to Get Started</h3>
+      <h3 style={{ marginBottom: '0.4rem' }}>Carrier Comparison</h3>
       <p className="score-explanation">
         The AI Score (0–100) weighs price (40%), star rating (30%), transit time (20%),
         and insurance coverage (10%) — so a lower-priced carrier can outscore a higher-rated one.
