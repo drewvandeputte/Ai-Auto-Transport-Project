@@ -189,6 +189,74 @@ button {
   }
 }
 
+/* ── Trust bar ────────────────────────────────────────────── */
+.trust-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: #13131f;
+  border-top: 1px solid #2e2e3f;
+  border-bottom: 1px solid #2e2e3f;
+}
+
+.trust-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.25rem 2rem;
+  border-right: 1px solid #2e2e3f;
+}
+
+.trust-bar-item:last-child {
+  border-right: none;
+}
+
+.trust-bar-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.trust-bar-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.15rem 0;
+}
+
+.trust-bar-desc {
+  font-size: 0.78rem;
+  color: #7c7c9a;
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .trust-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .trust-bar-item:nth-child(2) {
+    border-right: none;
+  }
+  .trust-bar-item:nth-child(3) {
+    border-top: 1px solid #2e2e3f;
+  }
+  .trust-bar-item:nth-child(4) {
+    border-top: 1px solid #2e2e3f;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-bar {
+    grid-template-columns: 1fr;
+  }
+  .trust-bar-item {
+    border-right: none;
+    border-top: 1px solid #2e2e3f;
+  }
+  .trust-bar-item:first-child {
+    border-top: none;
+  }
+}
+
 /* ── Content sections ─────────────────────────────────────── */
 .section-divider {
   border: none;

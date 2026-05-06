@@ -48,8 +48,10 @@ function HomePage({ onQuoteResult }) {
             <span>Without the Guesswork</span>
           </h1>
           <p className="hero-subheadline">
-            Enter your route and vehicle details. Our AI compares top carriers
-            in seconds and explains exactly why it chose the best one for you.
+            Most brokers hide what they charge. We don't. We charge a flat $149
+            fee — shown upfront, separate from the carrier rate. Enter your
+            route and our AI ranks every carrier in seconds with a plain-English
+            explanation of exactly why it chose the best one.
           </p>
         </div>
 
@@ -60,6 +62,38 @@ function HomePage({ onQuoteResult }) {
           {error && <p className="error-message">Error: {error}</p>}
         </div>
       </section>
+
+      {/* ── Trust Bar ─────────────────────────────────────── */}
+      <div className="trust-bar">
+        <div className="trust-bar-item">
+          <span className="trust-bar-icon">💎</span>
+          <div>
+            <p className="trust-bar-title">$149 Flat Fee</p>
+            <p className="trust-bar-desc">Shown upfront. Always.</p>
+          </div>
+        </div>
+        <div className="trust-bar-item">
+          <span className="trust-bar-icon">🤖</span>
+          <div>
+            <p className="trust-bar-title">No Sales Calls</p>
+            <p className="trust-bar-desc">Instant AI results.</p>
+          </div>
+        </div>
+        <div className="trust-bar-item">
+          <span className="trust-bar-icon">🛡</span>
+          <div>
+            <p className="trust-bar-title">Vetted Carriers Only</p>
+            <p className="trust-bar-desc">Rated, licensed & insured.</p>
+          </div>
+        </div>
+        <div className="trust-bar-item">
+          <span className="trust-bar-icon">✓</span>
+          <div>
+            <p className="trust-bar-title">No Payment Today</p>
+            <p className="trust-bar-desc">Confirm first, pay later.</p>
+          </div>
+        </div>
+      </div>
 
       <hr className="section-divider" />
 
