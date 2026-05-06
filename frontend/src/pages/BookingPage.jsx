@@ -7,6 +7,7 @@
 // ============================================================
 
 import { useState } from 'react';
+import { StarIcon, ClockIcon, ShieldCheckIcon, CheckCircleIcon } from '../components/Icons';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -74,7 +75,7 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
     return (
       <main className="booking-page">
         <div className="confirmation-box">
-          <div className="confirmation-icon">✓</div>
+          <div className="confirmation-icon"><CheckCircleIcon size={32} /></div>
           <h2>You're All Set, {form.name.split(' ')[0]}!</h2>
           <p>
             We've received your request for <strong>{carrier.name}</strong> and
@@ -160,17 +161,17 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
               </div>
               <div className="carrier-stats">
                 <div className="carrier-stat">
-                  <span className="stat-icon">⭐</span>
+                  <StarIcon size={20} className="stat-icon" />
                   <span className="stat-label">Rating</span>
                   <span className="stat-value">{carrier.rating} / 5.0</span>
                 </div>
                 <div className="carrier-stat">
-                  <span className="stat-icon">🕐</span>
+                  <ClockIcon size={20} className="stat-icon" />
                   <span className="stat-label">Transit Time</span>
                   <span className="stat-value">{carrier.transitDays} days</span>
                 </div>
                 <div className="carrier-stat">
-                  <span className="stat-icon">🛡</span>
+                  <ShieldCheckIcon size={20} className="stat-icon" />
                   <span className="stat-label">Insurance</span>
                   <span className="stat-value">${carrier.insuranceUSD.toLocaleString()}</span>
                 </div>
@@ -204,8 +205,8 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
               </div>
             </div>
             <div className="trust-signals">
-              <span className="trust-badge">✓ No payment required today</span>
-              <span className="trust-badge">✓ Free cancellation</span>
+              <span className="trust-badge"><CheckCircleIcon size={14} /> No payment required today</span>
+              <span className="trust-badge"><CheckCircleIcon size={14} /> Free cancellation</span>
             </div>
           </div>
 

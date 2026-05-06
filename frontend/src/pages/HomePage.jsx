@@ -7,6 +7,7 @@
 
 import { useState } from 'react';
 import QuoteForm from '../components/QuoteForm';
+import { SparklesIcon, BanknotesIcon, ShieldCheckIcon, BoltIcon, NoSymbolIcon, CreditCardIcon } from '../components/Icons';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -66,28 +67,28 @@ function HomePage({ onQuoteResult }) {
       {/* ── Trust Bar ─────────────────────────────────────── */}
       <div className="trust-bar">
         <div className="trust-bar-item">
-          <span className="trust-bar-icon">💎</span>
+          <BanknotesIcon size={22} className="trust-bar-icon" />
           <div>
             <p className="trust-bar-title">$149 Flat Fee</p>
             <p className="trust-bar-desc">Shown upfront. Always.</p>
           </div>
         </div>
         <div className="trust-bar-item">
-          <span className="trust-bar-icon">🤖</span>
+          <NoSymbolIcon size={22} className="trust-bar-icon" />
           <div>
             <p className="trust-bar-title">No Sales Calls</p>
             <p className="trust-bar-desc">Instant AI results.</p>
           </div>
         </div>
         <div className="trust-bar-item">
-          <span className="trust-bar-icon">🛡</span>
+          <ShieldCheckIcon size={22} className="trust-bar-icon" />
           <div>
             <p className="trust-bar-title">Vetted Carriers Only</p>
             <p className="trust-bar-desc">Rated, licensed & insured.</p>
           </div>
         </div>
         <div className="trust-bar-item">
-          <span className="trust-bar-icon">✓</span>
+          <CreditCardIcon size={22} className="trust-bar-icon" />
           <div>
             <p className="trust-bar-title">No Payment Today</p>
             <p className="trust-bar-desc">Confirm first, pay later.</p>
@@ -144,7 +145,7 @@ function HomePage({ onQuoteResult }) {
         </p>
         <div className="features-grid">
           <div className="feature-card">
-            <span className="feature-icon">🤖</span>
+            <SparklesIcon size={26} className="feature-icon" />
             <div>
               <p className="feature-title">AI-Powered Recommendations</p>
               <p className="feature-desc">
@@ -154,7 +155,7 @@ function HomePage({ onQuoteResult }) {
             </div>
           </div>
           <div className="feature-card">
-            <span className="feature-icon">💎</span>
+            <BanknotesIcon size={26} className="feature-icon" />
             <div>
               <p className="feature-title">Radical Price Transparency</p>
               <p className="feature-desc">
@@ -165,7 +166,7 @@ function HomePage({ onQuoteResult }) {
             </div>
           </div>
           <div className="feature-card">
-            <span className="feature-icon">🛡</span>
+            <ShieldCheckIcon size={26} className="feature-icon" />
             <div>
               <p className="feature-title">Cargo Insurance Included</p>
               <p className="feature-desc">
@@ -175,7 +176,7 @@ function HomePage({ onQuoteResult }) {
             </div>
           </div>
           <div className="feature-card">
-            <span className="feature-icon">⚡</span>
+            <BoltIcon size={26} className="feature-icon" />
             <div>
               <p className="feature-title">Results in Seconds</p>
               <p className="feature-desc">
