@@ -5,7 +5,9 @@
 // Clicking the card navigates to the booking page.
 // ============================================================
 
-function CarrierCard({ carrier, rank, isTop, onSelect }) {
+function CarrierCard({ carrier, rank, isTop, onSelect, brokerFee }) {
+  const totalPrice = carrier.priceUSD + (brokerFee || 0);
+
   return (
     <div
       className={`carrier-card ${isTop ? 'top-pick' : ''} carrier-card-clickable`}
@@ -26,7 +28,10 @@ function CarrierCard({ carrier, rank, isTop, onSelect }) {
         </div>
         <div className="carrier-price">
           <span className="carrier-price-amount">
-            ${carrier.priceUSD.toLocaleString()}
+            ${totalPrice.toLocaleString()}
+          </span>
+          <span className="carrier-price-breakdown">
+            Carrier ${carrier.priceUSD.toLocaleString()} + ${brokerFee} AutoRoute fee
           </span>
           <span className="carrier-score">AI Score: {carrier.score}/100</span>
           <span className="carrier-select-hint">Select →</span>

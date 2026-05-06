@@ -79,7 +79,7 @@ If a carrier cancels or goes dark before pickup:
 
 ## Business Context
 - Target customers: individuals relocating, military families, online car buyers
-- Revenue model: commission per shipment (~15-20% of shipment value, ~$175/shipment)
+- Revenue model: flat broker fee per shipment — $149 (open transport) / $199 (enclosed transport), shown transparently to the customer as a separate line item from the carrier rate
 - Revenue goal: $130K/year within 20-24 months
 - Founder is non-technical — Claude Code is doing the building
 - Every decision should favor simplicity and speed of build over complexity

@@ -9,6 +9,7 @@ import CarrierCard from '../components/CarrierCard';
 
 function ResultsPage({ quoteData, onReset, onSelectCarrier }) {
   const { rankedCarriers, topCarrier, explanation, quoteRequest } = quoteData;
+  const brokerFee = quoteRequest.transportType === 'enclosed' ? 199 : 149;
 
   return (
     <main className="results-page">
@@ -40,6 +41,7 @@ function ResultsPage({ quoteData, onReset, onSelectCarrier }) {
           rank={index + 1}
           isTop={carrier.id === topCarrier.id}
           onSelect={onSelectCarrier}
+          brokerFee={brokerFee}
         />
       ))}
 

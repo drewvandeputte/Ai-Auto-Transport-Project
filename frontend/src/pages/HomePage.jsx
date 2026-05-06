@@ -122,10 +122,11 @@ function HomePage({ onQuoteResult }) {
           <div className="feature-card">
             <span className="feature-icon">💎</span>
             <div>
-              <p className="feature-title">Transparent Pricing</p>
+              <p className="feature-title">Radical Price Transparency</p>
               <p className="feature-desc">
-                See the full price breakdown upfront. No hidden fees,
-                no surprises when your car arrives.
+                We charge a flat $149 (open) or $199 (enclosed) broker fee —
+                shown separately from the carrier rate. Most brokers hide their
+                cut. We don't.
               </p>
             </div>
           </div>

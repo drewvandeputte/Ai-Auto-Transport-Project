@@ -725,6 +725,13 @@ input[type="date"].form-input {
   display: block;
 }
 
+.carrier-price-breakdown {
+  font-size: 0.72rem;
+  color: #7c7c9a;
+  display: block;
+  margin-top: 0.1rem;
+}
+
 .carrier-score {
   font-size: 0.75rem;
   color: #55556a;

@@ -22,6 +22,9 @@ function calcDeliveryDate(shipDate, transitDays) {
 function BookingPage({ carrier, quoteData, onReset, onBack }) {
   const { quoteRequest, explanation } = quoteData;
 
+  const brokerFee  = quoteRequest.transportType === 'enclosed' ? 199 : 149;
+  const totalPrice = carrier.priceUSD + brokerFee;
+
   const [form, setForm]           = useState({ name: '', email: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
@@ -81,7 +84,7 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
             <p><strong>Vehicle:</strong> {quoteRequest.vehicleYear} {quoteRequest.vehicleMake} {quoteRequest.vehicleModel}</p>
             <p><strong>Route:</strong> {quoteRequest.pickupZip} → {quoteRequest.deliveryZip}</p>
             <p><strong>Carrier:</strong> {carrier.name}</p>
-            <p><strong>Price:</strong> ${carrier.priceUSD.toLocaleString()}</p>
+            <p><strong>Total Price:</strong> ${totalPrice.toLocaleString()}</p>
             <p><strong>Est. Delivery:</strong> {estimatedDelivery}</p>
           </div>
           <p className="confirmation-note">No payment is required today.</p>
@@ -180,7 +183,7 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
             <h3>Transparent Pricing</h3>
             <div className="pricing-table">
               <div className="pricing-row">
-                <span>Base transport fee</span>
+                <span>Carrier rate</span>
                 <span>${carrier.priceUSD.toLocaleString()}</span>
               </div>
               <div className="pricing-row">
@@ -192,12 +195,12 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
                 <span>Included</span>
               </div>
               <div className="pricing-row">
-                <span>Platform fee</span>
-                <span>$0</span>
+                <span>AutoRoute AI fee</span>
+                <span>${brokerFee}</span>
               </div>
               <div className="pricing-row pricing-total">
                 <span>Total</span>
-                <span>${carrier.priceUSD.toLocaleString()}</span>
+                <span>${totalPrice.toLocaleString()}</span>
               </div>
             </div>
             <div className="trust-signals">
@@ -226,7 +229,7 @@ function BookingPage({ carrier, quoteData, onReset, onBack }) {
 
               {/* Price callout */}
               <div className="form-price-callout">
-                <span className="form-price-amount">${carrier.priceUSD.toLocaleString()}</span>
+                <span className="form-price-amount">${totalPrice.toLocaleString()}</span>
                 <span className="form-price-label">Total — No payment today</span>
               </div>
 
