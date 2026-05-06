@@ -36,30 +36,33 @@ function HomePage({ onQuoteResult }) {
 
   return (
     <>
-      {/* ── Hero + Form ───────────────────────────────────────── */}
-      <section className="home-hero-section" id="get-a-quote">
-        <div>
-          <span className="hero-eyebrow">AI-Powered Auto Transport</span>
-          <h1 className="hero-headline">
-            Ship Your Car —<br />
-            <span>Without the Runaround</span>
-          </h1>
-          <p className="hero-subheadline">
-            Submit your route once. No sales calls, no hidden fees. Within 24
-            business hours you'll receive a graded AI carrier report with our
-            recommendation — and a flat $149 fee that's always shown upfront.
-          </p>
-        </div>
+      {/* ── Hero gradient wrapper (full bleed) ───────────────── */}
+      <div className="hero-gradient-wrapper" id="get-a-quote">
 
-        <div className="quote-card">
-          <p className="quote-card-title">Get Your Free Estimate</p>
-          <QuoteForm onSubmit={handleFormSubmit} loading={loading} />
-          {error && <p className="error-message">Error: {error}</p>}
-        </div>
-      </section>
+        {/* Hero + Form ────────────────────────────────────────── */}
+        <section className="home-hero-section">
+          <div>
+            <span className="hero-eyebrow">AI-Powered Auto Transport</span>
+            <h1 className="hero-headline">
+              Ship Your Car —<br />
+              <span>Without the Runaround</span>
+            </h1>
+            <p className="hero-subheadline">
+              Submit your route once. No sales calls, no hidden fees. Within 24
+              business hours you'll receive a graded AI carrier report with our
+              recommendation — and a flat $149 fee that's always shown upfront.
+            </p>
+          </div>
 
-      {/* ── Trust Bar ─────────────────────────────────────────── */}
-      <div className="trust-bar">
+          <div className="quote-card">
+            <p className="quote-card-title">Get Your Free Estimate</p>
+            <QuoteForm onSubmit={handleFormSubmit} loading={loading} />
+            {error && <p className="error-message">Error: {error}</p>}
+          </div>
+        </section>
+
+        {/* Trust Bar ──────────────────────────────────────────── */}
+        <div className="trust-bar">
         <div className="trust-bar-item">
           <BanknotesIcon size={22} className="trust-bar-icon" />
           <div>
@@ -88,7 +91,8 @@ function HomePage({ onQuoteResult }) {
             <p className="trust-bar-desc">Confirm first, pay later.</p>
           </div>
         </div>
-      </div>
+
+      </div>{/* end hero-gradient-wrapper */}
 
       <hr className="section-divider" />
 

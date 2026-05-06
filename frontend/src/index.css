@@ -114,6 +114,13 @@ button {
 
 /* ── Homepage layout ──────────────────────────────────────── */
 
+/* Full-bleed gradient wrapper behind hero + trust bar */
+.hero-gradient-wrapper {
+  background:
+    radial-gradient(ellipse 75% 65% at 80% 25%, rgba(109, 40, 217, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 12% 80%, rgba(109, 40, 217, 0.10) 0%, transparent 60%);
+}
+
 /* Hero + form: side by side on desktop, stacked on mobile */
 .home-hero-section {
   max-width: 1200px;
